@@ -6,11 +6,13 @@ import ReadingList from "./components/ReadingList";
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<BookList />} />
-        <Route path="/book/:id" element={<BookDetails />} />
-        <Route path="/reading-list" element={<ReadingList />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<BookList />} />
+          <Route path="/book/:id" element={<BookDetails />} />
+          <Route path="/reading-list" element={<ReadingList />} />
+        </Routes>
+      </main>
     </div>
   );
 }

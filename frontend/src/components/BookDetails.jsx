@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBook } from "../slices/readingListSlice";
@@ -7,6 +7,7 @@ import axios from "axios";
 const BookDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [book, setBook] = useState(null);
   const [error, setError] = useState(null);
 
@@ -25,6 +26,9 @@ const BookDetails = () => {
 
   return (
     <div>
+      <button className="btn go-back-btn" onClick={() => navigate("/")}>
+        Go Back
+      </button>
       <div className="book-card">
         <h1>{book.title}</h1>
         <p>by {book.author}</p>

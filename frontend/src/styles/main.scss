@@ -28,10 +28,25 @@ body {
   padding: 20px;
 }
 
+// Focus States
+a:focus, button:focus {
+  outline: 2px solid $secondary-color;
+  outline-offset: 2px;
+}
+
 // Heading styles
 h1 {
   color: $primary-color;
   margin-bottom: 20px;
+}
+
+// Go Back Button
+.go-back-btn {
+  margin-bottom: 20px;
+  background-color: $secondary-color;
+  &:hover {
+    background-color: color.scale($secondary-color, $lightness: -10%);
+  }
 }
 
 // Book list grid

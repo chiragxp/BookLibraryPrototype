@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book, showDescription = false, children }) => {
   return (
-    <div className="book-card">
-      <Link to={`/book/${book.id}`}>{book.title}</Link>
+    <article className="book-card" aria-labelledby={`book-title-${book.id}`}>
+      <Link to={`/book/${book.id}`} id={`book-title-${book.id}`}>
+        {book.title}
+      </Link>
       <p>by {book.author}</p>
-    </div>
+      {showDescription && <p>{book.description}</p>}
+      {children}
+    </article>
   );
 };
 
