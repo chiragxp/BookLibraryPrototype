@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addBook } from "../slices/readingListSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addBook, removeBook } from "../slices/readingListSlice";
 import axios from "axios";
 import Button from "./Button";
 
@@ -12,6 +12,13 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
   const [error, setError] = useState(null);
 
+  // Fetches reading list from Redux
+  const readingList = useSelector((state) => state.readingList);
+
+  // Checks if this book is already in the list
+  const isInList = readingList.some((b) => b.id === Number(id));
+
+  // Fetching Book by its ID from Backend via API call
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/v1/books/${id}`)
@@ -24,6 +31,15 @@ const BookDetails = () => {
 
   if (error) return <p>{error}</p>;
   if (!book) return <p>Loading...</p>;
+
+  // Toggle functionality for add/remove button on Book Details page
+  const handleToggle = () => {
+    if (isInList) {
+      dispatch(removeBook(Number(id)));
+    } else {
+      dispatch(addBook(book));
+    }
+  };
 
   return (
     <div>
@@ -38,12 +54,17 @@ const BookDetails = () => {
         <h1>{book.title}</h1>
         <p>by {book.author}</p>
         <p>{book.description}</p>
+        <p>Category: {book.category}</p>
         <Button
-          className="btn"
-          onClick={() => dispatch(addBook(book))}
-          ariaLabel={`Add ${book.title} to reading list`}
+          className={`btn ${isInList ? "remove" : ""}`}
+          onClick={handleToggle}
+          aria-label={
+            isInList
+              ? `Remove ${book.title} from reading list`
+              : `Add ${book.title} to reading list`
+          }
         >
-          Add to Reading List
+          {isInList ? "Remove from Reading List" : "Add to Reading List"}
         </Button>
       </div>
     </div>

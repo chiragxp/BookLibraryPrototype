@@ -18,20 +18,24 @@ const ReadingList = () => {
         Go Back
       </Button>
       <h1>Reading List</h1>
-      {readingList.map((book) => (
-        <div key={book.id} className="reading-list-item">
-          <span>
-            {book.title} by {book.author}
-          </span>
-          <Button
-            className="btn remove"
-            onClick={() => dispatch(removeBook(book.id))}
-            aria-label={`Remove ${book.title} from reading list`}
-          >
-            Remove
-          </Button>
-        </div>
-      ))}
+      {readingList.length === 0 ? (
+        <p className="empty-message">Your reading list is empty.</p>
+      ) : (
+        readingList.map((book) => (
+          <div key={book.id} className="reading-list-item">
+            <span>
+              {book.title} by {book.author}
+            </span>
+            <Button
+              className="btn remove"
+              onClick={() => dispatch(removeBook(book.id))}
+              aria-label={`Remove ${book.title} from reading list`}
+            >
+              Remove
+            </Button>
+          </div>
+        ))
+      )}
     </div>
   );
 };
