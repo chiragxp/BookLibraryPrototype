@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBook } from "../slices/readingListSlice";
 import axios from "axios";
+import Button from "./Button";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -26,16 +27,24 @@ const BookDetails = () => {
 
   return (
     <div>
-      <button className="btn go-back-btn" onClick={() => navigate("/")}>
+      <Button
+        className="btn go-back-btn"
+        onClick={() => navigate("/")}
+        ariaLabel="Go back to book list"
+      >
         Go Back
-      </button>
+      </Button>
       <div className="book-card">
         <h1>{book.title}</h1>
         <p>by {book.author}</p>
         <p>{book.description}</p>
-        <button className="btn" onClick={() => dispatch(addBook(book))}>
+        <Button
+          className="btn"
+          onClick={() => dispatch(addBook(book))}
+          ariaLabel={`Add ${book.title} to reading list`}
+        >
           Add to Reading List
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeBook } from "../slices/readingListSlice";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 const ReadingList = () => {
   const readingList = useSelector((state) => state.readingList);
@@ -9,21 +10,26 @@ const ReadingList = () => {
 
   return (
     <div>
-      <button className="btn go-back-btn" onClick={() => navigate("/")}>
+      <Button
+        className="btn go-back-btn"
+        onClick={() => navigate("/")}
+        ariaLabel="Go back to book list"
+      >
         Go Back
-      </button>
+      </Button>
       <h1>Reading List</h1>
       {readingList.map((book) => (
         <div key={book.id} className="reading-list-item">
           <span>
             {book.title} by {book.author}
           </span>
-          <button
+          <Button
             className="btn remove"
             onClick={() => dispatch(removeBook(book.id))}
+            aria-label={`Remove ${book.title} from reading list`}
           >
             Remove
-          </button>
+          </Button>
         </div>
       ))}
     </div>
