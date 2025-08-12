@@ -22,11 +22,11 @@ const BookList = () => {
           className="nav-link"
           aria-label="View your saved reading list"
         >
-          View Reading List
+          My Reading List
         </Link>
       </div>
 
-      <h1>📚 Books Catalog</h1>
+      <h1>📚 BooksHub</h1>
       <div className="book-list">
         {books.map((book) => (
           <BookCard key={book.id} book={book} />
