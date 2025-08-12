@@ -31,7 +31,7 @@ describe("BookList Component", () => {
     });
 
     // Ensure link to reading list
-    expect(screen.getByText("View Reading List")).toBeInTheDocument();
+    expect(screen.getByText("My Reading List")).toBeInTheDocument();
 
     // Fire Event to Simulate clicking a book link button
     const bookLink = screen.getByText("The Great Gatsby");
