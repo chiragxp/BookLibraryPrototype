@@ -1,0 +1,26 @@
+name: CI Pipeline
+
+on:  # Triggers: on pushes/PRs to key branches
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Run linting
+        run: npm run lint || true
+      - name: Run unit tests
+        run: npm test
