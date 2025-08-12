@@ -56,7 +56,7 @@ const books = [
   },
   {
     id: 8,
-    title: "Sapiens: A Brief History of Humankind",
+    title: "Sapiens",
     author: "Yuval Noah Harari",
     description:
       "A sweeping narrative of human history from the Stone Age to the present.",
